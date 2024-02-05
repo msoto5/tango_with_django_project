@@ -129,3 +129,8 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+
+# PASSWORD_HASHERS = (
+#     'django.contrib.auth.hashersPBKDF2PasswordHasher',
+#     'django.contrib.auth.hashersPBKDF2SHA1PasswordHasher'
+# )
