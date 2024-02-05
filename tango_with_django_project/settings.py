@@ -134,3 +134,5 @@ MEDIA_URL = '/media/'
 #     'django.contrib.auth.hashersPBKDF2PasswordHasher',
 #     'django.contrib.auth.hashersPBKDF2SHA1PasswordHasher'
 # )
+
+LOGIN_URL = 'rango:login'
