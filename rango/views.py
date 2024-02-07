@@ -8,13 +8,13 @@ from rango.forms import *
 from rango.models import *
 
 def index(request):
-    # category_list = Category.objects.order_by('-likes')[:5]
-    # pages_list = Page.objects.order_by('-views')[:5]
+    category_list = Category.objects.order_by('-likes')[:5]
+    pages_list = Page.objects.order_by('-views')[:5]
 
     context_dict = {}
     context_dict['boldmessage'] = "Crunchy, creamy, cookie, candy, cupcake!"
-    # context_dict['categories'] = category_list
-    # context_dict['pages'] = pages_list
+    context_dict['categories'] = category_list
+    context_dict['pages'] = pages_list
 
     # visitor_cookie_handler(request)
 
