@@ -112,7 +112,7 @@ class Chapter7CategoryFormAncillaryTests(TestCase):
         response = self.client.get(reverse('rango:add_category'))
         context = response.context
         content = response.content.decode()
-
+        print("***CONTENT:", content)
         self.assertTrue('form' in context)
 
         self.assertTrue('<h1>Add a Category</h1>' in content, f"{FAILURE_HEADER}Couldn't find 'Add a Category' header in the add_category() response. Check the template add_category.html.{FAILURE_FOOTER}")
