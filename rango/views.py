@@ -16,7 +16,7 @@ def index(request):
     context_dict['categories'] = category_list
     context_dict['pages'] = pages_list
 
-    # visitor_cookie_handler(request)
+    visitor_cookie_handler(request)
 
     response = render(request, 'rango/index.html', context=context_dict)
     return response
@@ -45,8 +45,8 @@ def visitor_cookie_handler(request):
 def about(request):
     context_dict = {'boldmessage': "Miguel"}
 
-    # visitor_cookie_handler(request)
-    # context_dict['visits'] = request.session['visits']
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
 
     response = render(request, 'rango/about.html', context=context_dict)
     return response
@@ -64,7 +64,7 @@ def show_category(request, category_name_slug):
         
     return render(request, 'rango/category.html', context=context_dict)
 
-#@login_required
+@login_required
 def add_category(request):
     form = CategoryForm()
 
@@ -79,7 +79,7 @@ def add_category(request):
 
     return render(request, 'rango/add_category.html', {'form': form})
 
-#@login_required
+@login_required
 def add_page(request, category_name_slug):
     try:
         category = Category.objects.get(slug=category_name_slug)
