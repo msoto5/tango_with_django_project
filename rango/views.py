@@ -55,7 +55,7 @@ def show_category(request, category_name_slug):
     context_dict = {}
     try:
         category = Category.objects.get(slug=category_name_slug)
-        pages = Page.objects.filter(category=category)
+        pages = Page.objects.filter(category=category).order_by('-views')
         context_dict['pages'] = pages
         context_dict['category'] = category
     except Category.DoesNotExist:
@@ -110,6 +110,22 @@ def add_page(request, category_name_slug):
     context_dict = {'form': form, 'category': category}
     return render(request, 'rango/add_page.html', context_dict)
 
+@login_required
+def restricted(request):
+    return render(request, 'rango/restricted.html')
+
+def goto_url(request):
+    if request.method == 'GET':
+        try:
+            page_id = request.GET['page_id']
+            selected_page = Page.objects.get(id=page_id)
+            selected_page.views += 1
+            selected_page.save()
+            return redirect(selected_page.url)
+        except Page.DoesNotExist:
+            return redirect(reverse('rango:index'))
+
+### REGISTER AND LOGIN MANUALLY (chapter 9)
 # def register(request):
 #     registered = False
 
@@ -160,10 +176,6 @@ def add_page(request, category_name_slug):
         
 #     else:
 #         return render(request, 'rango/login.html')
-    
-@login_required
-def restricted(request):
-    return render(request, 'rango/restricted.html')
 
 # @login_required
 # def user_logout(request):
